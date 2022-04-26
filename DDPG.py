@@ -243,16 +243,12 @@ for n in range(M):
             # Perform an update step on the parameters of the actor and critic networks #
             
             with torch.no_grad():
-                for index,parameter in enumerate(target_critic.parameters()):
-                    critic_parameter = list(critic.parameters())[index]
-                    new_value = (parameter * (1-critic_learning_rate)) + (critic_parameter * critic_learning_rate)
-                    parameter.copy_(new_value)
+                for target_parameter,parameter in zip(target_critic.parameters(),critic.parameters()):
+                    target_parameter.copy_((target_parameter * (1-critic_learning_rate)) + (parameter * critic_learning_rate))
             
             with torch.no_grad():
-                for index,parameter in enumerate(target_actor.parameters()):
-                    actor_parameter = list(actor.parameters())[index]
-                    new_value = (parameter * (1-actor_learning_rate)) + (actor_parameter * actor_learning_rate)
-                    parameter.copy_(new_value)
+                for target_parameter,parameter in zip(target_actor.parameters(),actor.parameters()):
+                    target_parameter.copy_((target_parameter * (1-critic_learning_rate)) + (parameter * critic_learning_rate))
             
         # Update the current state #
             
