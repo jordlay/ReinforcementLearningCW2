@@ -99,7 +99,7 @@ for l in range(20):
 
     # Initialize environment #
 
-    env = gym.make('Pendulum-v0')
+    env = gym.make('Pendulum-v1')
 
     # Initialize the memory #
 
@@ -242,7 +242,7 @@ for l in range(20):
             state = next_state
         
         # Print the outcome of the episode #
-        
+        print("total reward", total_reward)
         print(f"Episode {n+1}: Total reward: {round(total_reward,1)}, Time elapsed: {round(time.time() - t,2)}s")
         
         # Record the final undiscounted return #
